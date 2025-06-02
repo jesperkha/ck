@@ -1,12 +1,12 @@
+TARGET = ck
+CC = $(shell command -v clang >/dev/null 2>&1 && echo clang || echo gcc)
+
 ifeq ($(OS), Windows_NT)
-	CC = gcc
-else
-	CC = clang
+	TARGET = $(TARGET).exe
 endif
 
 FLAGS = -Wall -Werror -Wpedantic -std=c99 -Iinclude
 RELEASE_FLAGS = -O3
-TARGET = ck
 BINDIR = bin
 SRC = src/*.c
 BUDDY = include/buddy.h
@@ -26,3 +26,6 @@ $(BUDDY):
 	curl -fsSL https://raw.githubusercontent.com/jesperkha/buddy/refs/heads/main/install.sh | bash
 	mv buddy.h include/
 
+clean:
+	rm -r $(BINDIR)
+	rm $(BUDDY)
