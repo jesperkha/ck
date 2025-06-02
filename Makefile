@@ -1,8 +1,8 @@
-TARGET = ck
-CC = $(shell command -v clang >/dev/null 2>&1 && echo clang || echo gcc)
+TARGET := ck
+CC := $(shell command -v clang >/dev/null 2>&1 && echo clang || echo gcc)
 
 ifeq ($(OS), Windows_NT)
-	TARGET = $(TARGET).exe
+	TARGET := $(TARGET).exe
 endif
 
 FLAGS = -Wall -Werror -Wpedantic -std=c99 -Iinclude
