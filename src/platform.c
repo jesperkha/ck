@@ -2,7 +2,7 @@
 
 extern Editor e;
 
-void term_update_size(void)
+void term_get_size(void)
 {
     CONSOLE_SCREEN_BUFFER_INFO info;
     GetConsoleScreenBufferInfo(e.hconsole, &info);

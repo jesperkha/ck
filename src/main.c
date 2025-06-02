@@ -1,11 +1,15 @@
 #define BUDDY_IMPLEMENTATION
 #include "ck.h"
 
-Editor e;
-
 int main(void)
 {
-    out("bombardillo crocodillo");
+    Error err = init();
+    if (!err.empty)
+        panic_fmt("init: {s}", err.msg);
+
+    err = run();
+    if (!err.empty)
+        panic_fmt("run: {s}", err.msg);
+
     return 0;
 }
-

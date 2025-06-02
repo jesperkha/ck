@@ -38,3 +38,25 @@ typedef struct Editor
     HANDLE hconsole; // Console screen buffer
 #endif
 } Editor;
+
+typedef struct Error
+{
+    String msg; // Temp allocated
+    bool empty; // Non-error
+} Error;
+
+// Create new temp allocated error.
+Error new_error(const char *msg);
+
+#define NO_ERROR ((Error){.empty = true})
+
+// Initialize ck
+Error init(void);
+
+// Run main loop in ck
+Error run(void);
+
+void term_get_size(void);
+void term_set_cursor(int x, int y);
+void term_cursor_visible(bool visible);
+void term_write(char *string, int length);
