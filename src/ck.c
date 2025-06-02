@@ -2,7 +2,9 @@
 
 Editor e;
 
-#define BUFFER_POOL_SIZE MB(2)
+#define BUFFER_POOL_SIZE KB(16)
+
+const char render_buffer[MB(1)];
 
 Error init(void)
 {
@@ -10,12 +12,16 @@ Error init(void)
     Allocator pool = get_pool_allocator(heap, BUFFER_POOL_SIZE);
     e.buf = buf_new(pool);
 
+    // TODO: windows console init
+
     term_get_size();
     return NO_ERROR;
 }
 
 Error run(void)
 {
+    while (get_user_input() != 'q')
+        ;
 
     return NO_ERROR;
 }
@@ -26,8 +32,6 @@ Error clean(void)
     return NO_ERROR;
 }
 
-// :util
-
 Error new_error(const char *msg)
 {
     return (Error){
@@ -35,8 +39,6 @@ Error new_error(const char *msg)
         .msg = str_temp(msg),
     };
 }
-
-// :buffer
 
 // Allocate and initialize new buffer.
 Buffer *buf_new(Allocator a)
