@@ -56,3 +56,5 @@ temp
 tmp
 
 include/buddy.h
+
+.vscode
